@@ -11,10 +11,10 @@ public class Cell {
 
     private static final Logger log = LoggerFactory.getLogger(Cell.class);
 
-    ArrayList<CellValue> values = new ArrayList<>();
+    List<CellValue> values = new ArrayList<>();
 
     public static Cell computeCell(List<Cell> data){
-        log.info("WHO THE FUCK IS CALLING ME>!");
+
         Cell result = new Cell();
         int measure = data.stream()
                 .mapToInt(c->Integer.parseInt(c.get("Sales_Units")))
@@ -39,9 +39,6 @@ public class Cell {
                     //If we haven't set up our cell's dimensions yet
                     if(result.getValues().size() == 0){
 
-                        log.info("data cell to copy: \n{}", c.toDebugString());
-                        log.info("result cell before copy: \n{}", result.toDebugString());
-
                         //Copy the dimensionality of the data
                         for (CellValue cv: c.getValues()){
                             //Exclude measure value
@@ -51,7 +48,6 @@ public class Cell {
 
                         }
 
-                        log.info("result cell after copy: \n{}", result.toDebugString());
                     }
 
 
@@ -62,14 +58,17 @@ public class Cell {
                 .mapToInt(c->Integer.parseInt(c.get("Sales_Units")))
                 .sum();
 
-        CellValue measureValue = new CellValue();
-        measureValue.setName("Sales_Units");
-        measureValue.setValue(Integer.toString(measure));
-        result.addValue(measureValue);
+        //Ignore 0 sale results
+        if(measure != 0){
 
-        log.info("ComputeCell Result:\n{}", result.toDebugString());
+            CellValue measureValue = new CellValue();
+            measureValue.setName("Sales_Units");
+            measureValue.setValue(Integer.toString(measure));
+            result.addValue(measureValue);
 
-        return result;
+            return result;
+        }
+        return null;
     }
 
 
@@ -129,7 +128,19 @@ public class Cell {
         String result = "";
 
         for(CellValue cv: getValues()){
-            result += String.format("%20s", cv.getValue());
+            result += String.format("%25s", cv.getValue());
+        }
+
+        return result + "\n";
+    }
+
+    public String toNoCountryString(){
+        String result = "";
+
+        for(CellValue cv: getValues()){
+            if(!cv.getName().equals("Country")){
+                result += String.format("%25s", cv.getValue());
+            }
         }
 
         return result + "\n";
@@ -145,4 +156,50 @@ public class Cell {
         return result + "\n";
     }
 
+    /** Prune data outside the dimension list
+     *
+     * @param dims only data from these dimensions will remain
+     */
+
+    public void prune(List<Dimension> dims){
+
+        List<CellValue> newValues = new ArrayList<>();
+
+        if (dims.size() == 0){
+            for(CellValue cv: values){
+                if(cv.getName().equals("Sales_Units")){
+                    newValues.add(cv);
+                }
+            }
+        }else{
+            for (CellValue cv: values){
+                for(Dimension d: dims){
+                    if(d.getName().equals(cv.getName()) || cv.getName().equals("Sales_Units")){
+                        newValues.add(cv);
+                    }
+                }
+
+            }
+        }
+        this.values = newValues;
+    }
+
+    public void mergeQuarterYear(){
+        for(CellValue cv: values){
+            if(cv.getName().equals("Time_Year")){
+                cv.setName("Time_Quarter - Time_Year");
+                cv.setValue(this.get("Time_Quarter")+"-"+cv.getValue());
+            }
+        }
+
+        List<CellValue> newValues = new ArrayList<>();
+
+        for(CellValue cv: values){
+            if(!cv.getName().equals("Time_Quarter")){
+                newValues.add(cv);
+            }
+        }
+
+        values = newValues;
+    }
 }

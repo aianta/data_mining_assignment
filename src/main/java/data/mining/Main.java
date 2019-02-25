@@ -7,6 +7,7 @@ import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
@@ -32,8 +33,6 @@ public class Main {
 
             String headers =  br.readLine();
 
-            log.info("headers: {}", headers);
-
             String line = br.readLine();
 
             while(line != null){
@@ -46,6 +45,26 @@ public class Main {
 
                 line = br.readLine();
             }
+
+            data.sort(
+                    (Cell c1, Cell c2)->{
+                        if(!c1.get("Country").equals(c2.get("Country"))){
+                            return c1.get("Country").compareTo(c2.get("Country"));
+                        }else{
+                            //Then if the records have different years, sort by years
+                            if (Integer.parseInt(c1.get("Time_Year")) != Integer.parseInt(c2.get("Time_Year"))){
+                                Integer i1 = Integer.parseInt(c1.get("Time_Year"));
+                                Integer i2 = Integer.parseInt(c2.get("Time_Year"));
+
+                                return i1.compareTo(i2);
+                            }else{
+                                //Then if the records have different quarters, sort by quarters
+                                Integer i1 = Integer.parseInt(c1.get("Time_Quarter"));
+                                Integer i2 = Integer.parseInt(c2.get("Time_Quarter"));
+                                return i1.compareTo(i2);
+                            }
+                        }
+            });
 
             //Sort records
             records.sort(
@@ -92,53 +111,75 @@ public class Main {
             ioe.printStackTrace();
         }
 
-        /*
-        //Create Dimensions
-        List<Dimension> dims = new ArrayList<>();
-        Dimension country =  new Dimension();
-        country.setName("Country");
-        dims.add(country);
 
-        Dimension year = new Dimension();
-        year.setName("Time_Year");
-        dims.add(year);
 
-        Dimension quarter = new Dimension();
-        quarter.setName("Time_Quarter");
-        dims.add(quarter);
+        System.out.println("1. ()");
+        System.out.println("2. (Country)");
+        System.out.println("3. (Time_Year)");
+        System.out.println("4. (Time_Quarter - Time_Year)");
+        System.out.println("5. (Car_Manufacturer)");
+        System.out.println("6. (Country, Time_Year)");
+        System.out.println("7. (Country, Time_Quarter - Time_Year)");
+        System.out.println("8. (Country, Car_Manufacturer)");
+        System.out.println("9. (Time_Year, Car_Manufacturer)");
+        System.out.println("10. (Time_Quarter - Time_Year, Car_Manufacturer)");
+        System.out.println("11. (Country, Time_Year, Car_Manufacturer)");
+        System.out.println("12. (Country, Time_Quarter - Time_Year, Car_Manufacturer)");
+        System.out.println("Please enter a number in the range 1-12:");
 
-        Dimension manufacturer = new Dimension();
-        manufacturer.setName("Car_Manufacturer");
-        dims.add(manufacturer);
+        Scanner in = new Scanner(System.in);
+        int option = in.nextInt();
 
-        records.forEach(r->{
-            country.addValue(r.getCountry());
-            year.addValue(Integer.toString(r.getYear()));
-            quarter.addValue(Integer.toString(r.getQuarter()));
-            manufacturer.addValue(r.getManufacturer());
-        });
+        String query = "";
 
-        dims.forEach(d->log.info(d.toString()));
-
-        System.out.println(String.format("%-15s%15s%15s", country.getName(), year.getName(), "Sales_Units"));
-        for(String s: cuboid(records, country,year)){
-            System.out.println(s);
+        switch (option){
+            case 1:
+                query = "";
+                break;
+            case 2:
+                query = "Country";
+                break;
+            case 3:
+                query = "Time_Year";
+                break;
+            case 4:
+                query = "Time_Quarter - Time_Year";
+                break;
+            case 5:
+                query = "Car_Manufacturer";
+                break;
+            case 6:
+                query = "Country,Time_Year";
+                break;
+            case 7:
+                query = "Country,Time_Quarter - Time_Year";
+                break;
+            case 8:
+                query = "Country,Car_Manufacturer";
+                break;
+            case 9:
+                query = "Time_Year,Car_Manufacturer";
+                break;
+            case 10:
+                query = "Time_Quarter - Time_Year,Car_Manufacturer";
+                break;
+            case 11:
+                query = "Country,Time_Year,Car_Manufacturer";
+                break;
+            case 12:
+                query = "Country,Time_Quarter - Time_Year,Car_Manufacturer";
+                break;
+            default:
+                System.out.println("Please enter a valid option next time!");
+                System.exit(0);
         }
-
-        */
-
-        for(Cell c: data){
-            System.out.print(c.toString());
-        }
-        log.info("Total Cells: {}", data.size());
-
-        String query = "Country,Time_Quarter - Time_Year,Car_Manufacturer";
 
         Cuboid c = new Cuboid();
-        c.extractDimensions(query);
+        c.extractDimensions(query,option);
         c.importCells(data);
 
         System.out.print(c.toString());
+
 
     }
 

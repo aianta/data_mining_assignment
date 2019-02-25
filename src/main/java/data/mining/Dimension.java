@@ -66,7 +66,6 @@ public class Dimension {
 
         for (String v: values){
             Predicate<Cell> predicate = p->p.get(this.getName()).equals(v);
-            log.info("p->p.get({}).equals({})", this.getName(), v);
             result.add(predicate);
         }
 
