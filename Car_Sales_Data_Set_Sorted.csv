@@ -1,0 +1,101 @@
+Record_ID,Country,Time_Year,Time_Quarter,Car_Manufacturer,Sales_Units
+1,Canada,2017,1,Ford,898
+2,Canada,2017,1,Honda,873
+3,Canada,2017,1,Ford,628
+4,Canada,2017,1,Honda,696
+5,Canada,2017,1,Toyota,894
+6,Canada,2017,1,BMW,927
+7,Canada,2017,1,Honda,593
+8,Canada,2017,1,Ford,966
+9,Canada,2017,2,BMW,519
+10,Canada,2017,2,Ford,802
+11,Canada,2017,2,BMW,866
+12,Canada,2017,2,Ford,612
+13,Canada,2017,2,Toyota,714
+14,Canada,2017,3,Ford,753
+15,Canada,2017,3,Honda,592
+16,Canada,2017,3,BMW,606
+17,Canada,2017,3,BMW,622
+18,Canada,2017,3,Honda,742
+19,Canada,2017,3,BMW,975
+20,Canada,2017,4,BMW,513
+21,Canada,2017,4,Honda,986
+22,Canada,2017,4,Honda,704
+23,Canada,2017,4,Ford,947
+24,Canada,2017,4,BMW,556
+25,Canada,2017,4,Toyota,915
+26,Canada,2018,1,Ford,535
+27,Canada,2018,1,Toyota,531
+28,Canada,2018,1,Honda,519
+29,Canada,2018,1,Ford,598
+30,Canada,2018,1,Honda,712
+31,Canada,2018,1,Toyota,520
+32,Canada,2018,1,Ford,603
+33,Canada,2018,1,Ford,681
+34,Canada,2018,1,Toyota,696
+35,Canada,2018,1,Ford,763
+36,Canada,2018,1,Toyota,866
+37,Canada,2018,1,BMW,791
+38,Canada,2018,1,Toyota,689
+39,Canada,2018,1,Honda,956
+40,Canada,2018,1,Ford,529
+41,Canada,2018,2,Toyota,955
+42,Canada,2018,2,BMW,790
+43,Canada,2018,2,Ford,882
+44,Canada,2018,2,Honda,718
+45,Canada,2018,3,Toyota,753
+46,Canada,2018,3,Honda,658
+47,Canada,2018,4,BMW,870
+48,Canada,2018,4,Ford,754
+49,Canada,2018,4,Ford,892
+50,Canada,2018,4,BMW,709
+51,Canada,2018,4,Honda,978
+52,Canada,2018,4,Honda,574
+53,United States,2017,1,BMW,587
+54,United States,2017,1,BMW,627
+55,United States,2017,1,BMW,548
+56,United States,2017,1,BMW,656
+57,United States,2017,1,BMW,881
+58,United States,2017,2,Honda,552
+59,United States,2017,2,BMW,608
+60,United States,2017,2,Ford,601
+61,United States,2017,2,Honda,893
+62,United States,2017,2,Toyota,638
+63,United States,2017,2,BMW,745
+64,United States,2017,2,Toyota,508
+65,United States,2017,3,Honda,717
+66,United States,2017,4,Ford,692
+67,United States,2017,4,Ford,570
+68,United States,2017,4,Ford,546
+69,United States,2017,4,BMW,845
+70,United States,2017,4,BMW,872
+71,United States,2017,4,Ford,633
+72,United States,2017,4,Toyota,536
+73,United States,2017,4,Honda,812
+74,United States,2017,4,BMW,636
+75,United States,2017,4,Honda,790
+76,United States,2018,1,BMW,803
+77,United States,2018,2,Ford,591
+78,United States,2018,2,BMW,971
+79,United States,2018,2,Toyota,718
+80,United States,2018,2,BMW,963
+81,United States,2018,2,BMW,752
+82,United States,2018,2,Toyota,848
+83,United States,2018,2,Ford,780
+84,United States,2018,2,Toyota,631
+85,United States,2018,2,Ford,798
+86,United States,2018,2,BMW,903
+87,United States,2018,3,Toyota,640
+88,United States,2018,3,BMW,882
+89,United States,2018,3,Toyota,622
+90,United States,2018,3,BMW,924
+91,United States,2018,3,Honda,572
+92,United States,2018,4,Honda,684
+93,United States,2018,4,Toyota,800
+94,United States,2018,4,Honda,665
+95,United States,2018,4,BMW,726
+96,United States,2018,4,Ford,609
+97,United States,2018,4,Ford,659
+98,United States,2018,4,Toyota,703
+99,United States,2018,4,BMW,663
+100,United States,2018,4,BMW,849
